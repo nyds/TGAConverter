@@ -9,36 +9,40 @@ namespace TGAConverter.Services
     {
         private const string OutputDirectoryName = "JPG";
 
-        public string WorkingDirectory { get; private set; }
-        public string OutputDirectory { get; private set; }
+        private readonly string _workingDirectory;
+        private readonly string _outputDirectory;
+
+        public FileService()
+        {
+            _workingDirectory = Directory.GetCurrentDirectory();
+            _outputDirectory = SetupOutputDirectory();
+        }
 
         public IEnumerable<string> GetTgaFilesFromWorkingDirectory()
         {
-            WorkingDirectory = Directory.GetCurrentDirectory();
-            return Directory.GetFiles(WorkingDirectory, "*.tga").Select(Path.GetFileName);
+            return Directory.GetFiles(_workingDirectory, "*.tga").Select(Path.GetFileName);
         }
 
         public string GetWorkingDirectoryPath()
         {
-            return WorkingDirectory;
+            return _workingDirectory;
         }
 
         public string GetOutputDirectoryPath()
         {
-            return !string.IsNullOrEmpty(OutputDirectory) ? OutputDirectory : SetupOutputDirectory();
+            return _outputDirectory;
         }
 
         private string SetupOutputDirectory()
         {
-            var outputDirectory = $@"{WorkingDirectory}\{OutputDirectoryName}";
+            var outputDirectory = $@"{_workingDirectory}\{OutputDirectoryName}";
 
             if (!Directory.Exists(outputDirectory))
             {
                 Directory.CreateDirectory(outputDirectory);
             }
 
-            OutputDirectory = outputDirectory;
-            return OutputDirectory;
+            return _outputDirectory;
         }
     }
 }
