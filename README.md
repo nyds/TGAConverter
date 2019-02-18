@@ -7,3 +7,7 @@ Download the executable, paste it into the WoW 1.12 client screenshot directory 
 ##
 **Inspecting the source**  
 Source code can be viewed in the TGAConverter directory.
+##
+**VirusTotal report**  
+Three false positives, but do check out the source yourself if you're hesitant!
+https://www.virustotal.com/#/file/ff1a32339eaa4ffc14cf745825cabae92292a1f31e2ce737b67f0d05657de4a7/detection
